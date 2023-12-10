@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
-    @Value("$jwt.signing.key")
+    @Value("${jwt.signing.key}")
     String jwtSecretKey;
 
     private final JwtAuthProvider jwtAuthProvider;

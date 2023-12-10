@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @GrpcService
 public class AuthGprcService extends AuthServiceGrpc.AuthServiceImplBase {
 
-    @Value("$jwt.signing.key")
+    @Value("${jwt.signing.key}")
     String jwtSecretKey;
 
     final private JwtAuthProvider jwtAuthProvider;
@@ -46,7 +46,7 @@ public class AuthGprcService extends AuthServiceGrpc.AuthServiceImplBase {
                 .claim("auth",authorities)
                 .setIssuedAt(Date.from(now))
                 .setExpiration(Date.from(expiration))
-                .signWith(SignatureAlgorithm.ES512, jwtSecretKey)
+                .signWith(SignatureAlgorithm.HS512, jwtSecretKey)
                 .compact()).build());
 
         responseObserver.onCompleted();
